@@ -1,14 +1,14 @@
 #!/bin/bash
 echo "* Creating a RabbitMQ 3.6 docker container (Source)..."
-docker run -d --hostname rabbit36 --name rabbit36 -p 61234:15672 rabbitmq:3.6-management > /dev/null
+docker run -d --hostname rabbit36 --name rabbit36 rabbitmq:3.6-management > /dev/null
 sleep 2
 
 echo "* Creating a RabbitMQ 3.7 docker container (Destination)..."
-docker run -d --hostname rabbit37 --name rabbit37 -p 61235:15672 rabbitmq:3.7-management > /dev/null
+docker run -d --hostname rabbit37 --name rabbit37 rabbitmq:3.7-management > /dev/null
 sleep 2
 
 echo "* Creating a latest RabbitMQ 3.x docker container (Shovel Management)..."
-docker run -d --hostname rabbit-shovel-node --name rabbit-shovel-node -p 61236:15672 rabbitmq:3-management > /dev/null
+docker run -d --hostname rabbit-shovel-node --name rabbit-shovel-node rabbitmq:3-management > /dev/null
 sleep 2
 
 echo "* Adding the DNS entries of source and destination containers in the shovel management container..."
