@@ -10,7 +10,7 @@
   - Publish 500 messages to the source queue.  
   - Get couple of messages from the source queue  
   - Get couple of messages from the destination queue  to show that no messages exists in that queue yet.  
-  - Create a shovel user, assign permissions.  
+  - Create a shovel user and assign permissions in the shovel container.  
   - Create a shovel named "my-shovel" in shovel container and configure it to migrate messages from source to destination queue.  
   - Get the status of the shovel.  
   - Get couple of messages from the source queue to show that no messages exists in that queue because they have been migrated.  
