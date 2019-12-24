@@ -16,3 +16,5 @@
   - Get couple of messages from the source queue to show that no messages exists in that queue because they have been migrated.  
   - Get couple of messages from the destination queue to show that messages were migrated to this queue.  
   - Display the links to access source, destination and shovel RabbitMQ management UI.  
+- To reset the docker environment - **./cleanup.sh**  
+  - NOTE: This will destroy the entire setup for doing a fresh deployment.
