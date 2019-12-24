@@ -1,0 +1,18 @@
+- Docker containers were used to emulate the RabbitMQ service instances.  
+- Docker container setup:  
+  - RabbitMQ 3.6 container used as source  
+  - RabbitMQ 3.7 container used as destination  
+  - Latest RabbitMQ 3.x container (3.8 in this case) used for shovel operations  
+- Run the script - **./run_me.sh**  
+- Script Operation:  
+  - A source queue named "source_queue" will be created in the source container.  
+  - A destination queue named "destination_queue" will be created in the destination container.  
+  - Publish 500 messages to the source queue.  
+  - Get couple of messages from the source queue  
+  - Get couple of messages from the destination queue  to show that no messages exists in that queue yet.  
+  - Create a shovel user, assign permissions.  
+  - Create a shovel named "my-shovel" in shovel container and configure it to migrate messages from source to destination queue.  
+  - Get the status of the shovel.  
+  - Get couple of messages from the source queue to show that no messages exists in that queue because they have been migrated.  
+  - Get couple of messages from the destination queue to show that messages were migrated to this queue.  
+  - Display the links to access source, destination and shovel RabbitMQ management UI.  
