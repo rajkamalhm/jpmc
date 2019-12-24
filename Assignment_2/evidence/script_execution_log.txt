@@ -1,0 +1,105 @@
+raj@my-ubuntu:~/Desktop/jpmc/git_repo/jpmc/Assignment_2$ sudo ./cleanup.sh 
+[sudo] password for raj: 
+Stopping RabbitMQ source(3.6), destination(3.7) & shovel management(3.x) containers...
+Deleting RabbitMQ source(3.6), destination(3.7) & shovel management(3.x) containers...
+raj@my-ubuntu:~/Desktop/jpmc/git_repo/jpmc/Assignment_2$ sudo ./run_me.sh 
+* Creating a RabbitMQ 3.6 docker container (Source)...
+* Creating a RabbitMQ 3.7 docker container (Destination)...
+* Creating a latest RabbitMQ 3.x docker container (Shovel Management)...
+* Adding the DNS entries of source and destination containers in the shovel management container...
+* Enabling shovel and shovel management plugins in the shovel management container...
+Enabling plugins on node rabbit@rabbit-shovel-node:
+rabbitmq_shovel
+rabbitmq_shovel_management
+The following plugins have been configured:
+  rabbitmq_management
+  rabbitmq_management_agent
+  rabbitmq_shovel
+  rabbitmq_shovel_management
+  rabbitmq_web_dispatch
+Applying plugin configuration to rabbit@rabbit-shovel-node...
+The following plugins have been enabled:
+  rabbitmq_shovel
+  rabbitmq_shovel_management
+
+started 2 plugins.
+* Creating source queue in RabbitMQ 3.6 instance...
+* Creating destination queue in RabbitMQ 3.7 instance...
+* Publishing 500 messages to the source queue...
+* Getting couple of messages from the source queue...
+[
+  {
+    "payload_bytes": 14,
+    "redelivered": false,
+    "exchange": "",
+    "routing_key": "source_queue",
+    "message_count": 499,
+    "properties": [],
+    "payload": "Sample Message",
+    "payload_encoding": "string"
+  },
+  {
+    "payload_bytes": 14,
+    "redelivered": false,
+    "exchange": "",
+    "routing_key": "source_queue",
+    "message_count": 498,
+    "properties": [],
+    "payload": "Sample Message",
+    "payload_encoding": "string"
+  }
+]
+* Getting couple of messages from the destination queue (Output should be empty since the shovel is not yet created)...
+[]
+* Creating the shovel user...
+* Assigning permissions to shovel user...
+* Creating the shovel...
+* Getting the status of the shovel...
+[
+  {
+    "node": "rabbit@rabbit-shovel-node",
+    "timestamp": "2019-12-24 3:36:14",
+    "name": "my-shovel",
+    "vhost": "/",
+    "type": "dynamic",
+    "state": "running",
+    "src_uri": "amqp://rabbit36",
+    "src_protocol": "amqp091",
+    "dest_protocol": "amqp091",
+    "dest_uri": "amqp://rabbit37",
+    "src_queue": "source_queue",
+    "dest_queue": "destination_queue"
+  }
+]
+* Getting couple of messages from the source queue (Output should be empty since the messages were migrated)...
+[]
+* Getting couple of messages from the destination queue...
+[
+  {
+    "payload_bytes": 14,
+    "redelivered": false,
+    "exchange": "",
+    "routing_key": "destination_queue",
+    "message_count": 499,
+    "properties": [],
+    "payload": "Sample Message",
+    "payload_encoding": "string"
+  },
+  {
+    "payload_bytes": 14,
+    "redelivered": false,
+    "exchange": "",
+    "routing_key": "destination_queue",
+    "message_count": 498,
+    "properties": [],
+    "payload": "Sample Message",
+    "payload_encoding": "string"
+  }
+]
+
+----------------------------------------------------
+Management UI can be accessed with the below links:
+RabbitMQ 3.6 (Source) - http://172.17.0.2:15672
+RabbitMQ 3.7 (Destination) - http://172.17.0.3:15672
+RabbitMQ 3.x (Shovel management) - http://172.17.0.4:15672
+

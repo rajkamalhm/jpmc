@@ -1,7 +1,7 @@
 #!/bin/bash
 
-curl https://raw.githubusercontent.com/dhruvbehl/jsonTest/master/login.log > ./login.log
-curl https://raw.githubusercontent.com/dhruvbehl/jsonTest/master/ipfilter.json > ./ipfilter.json
+curl -s https://raw.githubusercontent.com/dhruvbehl/jsonTest/master/login.log > ./login.log
+curl -s https://raw.githubusercontent.com/dhruvbehl/jsonTest/master/ipfilter.json > ./ipfilter.json
 
 for IP in $(cat ./ipfilter.json | jq -r '.data[].ipAddress')
 do
